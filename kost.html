@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kos Pak Bos - Tempat Tinggal Nyaman di Pusat Kota</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Variabel Warna */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #f72585;
+        }
+
+        /* Global Styles */
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section:nth-child(even) {
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/65e95194-7c8f-45a7-af21-80ea2a3f595f.png') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Fasilitas Section */
+        .facilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .facility-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .facility-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .facility-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .facility-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .facility-card:hover .facility-img img {
+            transform: scale(1.1);
+        }
+
+        .facility-content {
+            padding: 1.5rem;
+        }
+
+        .facility-content h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Galeri Section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            transition: bottom 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            bottom: 0;
+        }
+
+        /* Video Section */
+        .video-container {
+            position: relative;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Maps Section */
+        .map-container {
+            position: relative;
+            height: 0;
+            overflow: hidden;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Kontak Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            /* Mobile-specific gallery adjustments */
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Video and map adjustments */
+            .video-container, .map-container {
+                padding-bottom: 75%; /* More square aspect for mobile */
+            }
+        }
+
+        /* Tiny mobile screens */
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Kos Pak Bos</a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#facilities">Fasilitas</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                    <li><a href="#video">Video</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Nikmati Tinggal Nyaman di Kos Pak Bos</h1>
+                <p>Tempat tinggal modern dengan fasilitas lengkap di lokasi strategis. Dapatkan pengalaman hidup terbaik dengan harga terjangkau.</p>
+                <a href="#contact" class="btn btn-primary">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fasilitas Section -->
+    <section id="facilities">
+        <div class="container">
+            <h2 class="section-title">Fasilitas Kami</h2>
+            <div class="facilities">
+                <!-- Fasilitas 1 -->
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d4b6a660-0f4a-406d-b4b1-467a4b08469d.png" alt="Kamar kos dengan tempat tidur single, meja belajar, dan lemari pakaian sederhana">
+                    </div>
+                    <div class="facility-content">
+                        <h3>Kamar Nyaman</h3>
+                        <p>Kamar tidur simple & praktis dengan tempat tidur single, lemari pakaian, dan meja belajar. Tersedia kipas angin untuk kenyamanan.</p>
+                    </div>
+                </div>
+
+                <!-- Fasilitas 2 -->
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/eacc48b9-2eec-4a61-98ac-11f92f7b3dff.png" alt="Kamar mandi sederhana dengan wastafel dan shower di Kos Pak Bos">
+                    </div>
+                    <div class="facility-content">
+                        <h3>Kamar Mandi Bersih</h3>
+                        <p>Kamar mandi dengan shower sederhana namun bersih. Air mengalir lancar dan tersedia ember untuk kebutuhan mandi.</p>
+                    </div>
+                </div>
+
+                <!-- Fasilitas 3 -->
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7c315c10-a1a2-4a20-9743-7e0415fe1c33.png" alt="Dapur kecil dengan kompor portabel dan dispenser di Kos Pak Bos">
+                    </div>
+                    <div class="facility-content">
+                        <h3>Dapur Bersama</h3>
+                        <p>Dapur kecil dengan kompor portable dan dispenser. Terdapat meja untuk menyiapkan makanan dan rak penyimpanan peralatan makan.</p>
+                    </div>
+                </div>
+
+                <!-- Fasilitas 4 -->
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/caab829f-95fc-4c12-8d0c-f5f9861f2f87.png" alt="Area santai kecil dengan kursi plastik di Kos Pak Bos">
+                    </div>
+                    <div class="facility-content">
+                        <h3>Ruang Santai</h3>
+                        <p>Terdapat beberapa kursi plastik di teras untuk bersantai sambil ngobrol dengan penghuni lain. Cocok untuk melepas lelah setelah beraktivitas.</p>
+                    </div>
+                </div>
+
+                <!-- Fasilitas 5 -->
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a77406b2-1ab9-4da4-a23c-3801e81f4f91.png" alt="Tandon air dan area jemuran sederhana di Kos Pak Bos">
+                    </div>
+                    <div class="facility-content">
+                        <h3>Fasilitas Mandi & Jemur</h3>
+                        <p>Tersedia tandon air dan area jemuran baju di halaman belakang kos. Biarkan jemuran Anda terkena sinar matahari langsung.</p>
+                    </div>
+                </div>
+
+                <!-- Fasilitas 6 -->
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f992b6d2-0d71-465d-b753-630d133772a7.png" alt="Parkiran kecil untuk motor di depan Kos Pak Bos">
+                    </div>
+                    <div class="facility-content">
+                        <h3>Parkiran Motor</h3>
+                        <p>Area parkir motor di depan kos yang terlindung dari hujan dan sinar matahari langsung. Aman dan cukup untuk beberapa motor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Section -->
+    <section id="gallery">
+        <div class="container">
+            <h2 class="section-title">Galeri Kos</h2>
+            <div class="gallery">
+                <!-- Galeri 1 -->
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e5b22a1-f76b-4f6a-9e16-9c5b4b0f5cae.png" alt="Tampilan depan Kos Pak Bos sederhana dengan cat kuning muda dan taman kecil">
+                    <div class="gallery-overlay">
+                        <h3>Depan Kos</h3>
+                        <p>Tampilan depan yang sederhana tapi bersih</p>
+                    </div>
+                </div>
+
+                <!-- Galeri 2 -->
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0231abc4-2d7f-4c78-8ad4-e82f9423fc20.png" alt="Kamar kos dengan tempat tidur sederhana untuk satu orang">
+                    <div class="gallery-overlay">
+                        <h3>Kamar Kos Standar</h3>
+                        <p>Kamar sederhana dengan tempat tidur single</p>
+                    </div>
+                </div>
+
+                <!-- Galeri 3 -->
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9bf6d9eb-a44d-4534-9b6a-3bfb4e5ba87d.png" alt="Kamar kos lain dengan pencahayaan alami dari jendela">
+                    <div class="gallery-overlay">
+                        <h3>Kamar dengan Jendela</h3>
+                        <p>Sinar matahari pagi masuk ke kamar</p>
+                    </div>
+                </div>
+
+                <!-- Galeri 4 -->
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5cf4b53a-b5dc-4ce3-9002-d7c7f9f375de.png" alt="Dapur kecil dengan kompor portabel dan perlengkapan dasar">
+                    <div class="gallery-overlay">
+                        <h3>Dapur Bersama</h3>
+                        <p>Tempat menyiapkan makanan sederhana</p>
+                    </div>
+                </div>
+
+                <!-- Galeri 5 -->
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6a0be380-8a2d-4cc6-ad3e-cd92e9ed0100.png" alt="Kamar mandi kecil dengan shower dan wastafel sederhana">
+                    <div class="gallery-overlay">
+                        <h3>Kamar Mandi</h3>
+                        <p>Sederhana namun bersih dan fungsional</p>
+                    </div>
+                </div>
+
+                <!-- Galeri 6 -->
+                <div class="gallery-item">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a77baa37-53a8-44e4-a3c7-aea53b0c7339.png" alt="Halaman depan Kos Pak Bos dengan beberapa tanaman dalam pot">
+                    <div class="gallery-overlay">
+                        <h3>Taman Mini</h3>
+                        <p>Area hijau kecil di depan kos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video">
+        <div class="container">
+            <h2 class="section-title">Tur Kos Kami</h2>
+            <div class="video-container">
+                <video width="100%" height="auto" controls>
+                    <source src="video-tur-kos.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung video tag.
+                </video>
+            </div>
+            <div class="text-center" style="margin-top: 2rem;">
+                <p>Lihat video tur singkat Kos Pak Bos untuk memudahkan Anda memilih kamar yang sesuai.</p>
+                <small><i>Catatan: Video di atas adalah contoh. Anda bisa menggantinya dengan video asli kos Anda.</i></small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Hubungi Kami</h2>
+            
+            <!-- Maps -->
+            <div class="map-container">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7854.820501605472!2d123.62144910801563!3d-10.147268959538708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c5683002034a17f%3A0xaafd3e7d9585320c!2sKos%20Pak%20Bos!5e0!3m2!1sen!2sid!4v1755670415397!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Telepon</h3>
+                   <p>+62 821-1751-9277</p>
+            
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>kospakbos@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" name="message" required placeholder="Saya tertarik dengan kamar tipe..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h2>Kos Pak Bos</h2>
+                <p>Tempat kost sederhana dengan suasana kekeluargaan</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <p>&copy; 2023 Kos Pak Bos. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Here you would normally send the data to a server
+            console.log('Form submitted:', data);
+            
+            alert('Halo ' + data.name + '! Terima kasih minatnya ke Kos Pak Bos. Kami akan segera menghubungi Anda.');
+            contactForm.reset();
+        });
+
+        // Animation on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight - 100) {
+                    section.style.opacity = 1;
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate sections on page load
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach((section, index) => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+            });
+            
+            // Trigger animation on load
+            setTimeout(() => {
+                sections.forEach(section => {
+                    section.style.opacity = 1;
+                    section.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
